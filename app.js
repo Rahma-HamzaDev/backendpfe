@@ -46,7 +46,7 @@ app.use('/api/rends', rendRouter);
 app.use('/api/users', userRouter);
 app.use('/api/cons', consRouter);
 app.use('/api/ord', ordRouter);
-app.use('/api/admins', adminRouter);
+app.use('/api/admin', adminRouter);
 
 app.listen(PORT, () => {
     console.log(`Server is listening on port ${PORT}`);

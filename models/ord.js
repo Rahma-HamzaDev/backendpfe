@@ -16,11 +16,6 @@ const ordSchema = mongoose.Schema({
     // NomPatient: { type: String  },
      observation: { type: String  },
 
- medecinID: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: medecin
-},
-
  patientID: {
     type: mongoose.Schema.Types.ObjectId,
     ref: patient

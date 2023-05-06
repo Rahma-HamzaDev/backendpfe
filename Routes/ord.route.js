@@ -6,8 +6,8 @@ const router = express.Router();
 
 router.get('/cons/:consId', async (req, res) => {
     try {
-      const ordonnances = await Ord.find({ consID: req.params.consId }).populate("patientID").exec();
-      res.status(200).json(ordonnances);
+      const ordonnance = await Ord.findOne({ consID: req.params.consId }).populate("consID").populate("patientID").exec();
+      res.status(200).json(ordonnance);
     } catch (error) {
       res.status(404).json({ message: error.message });
     }
@@ -17,7 +17,7 @@ router.get('/cons/:consId', async (req, res) => {
 
 router.get('/', async (req, res, )=> {
     try {
-    const ord1 = await Ord.find().populate("consID").exec();
+    const ord1 = await Ord.find().populate("consID").populate("patientID").exec();
     res.status(200).json(ord1);
     } catch (error) {
     res.status(404).json({ message: error.message });
@@ -29,7 +29,9 @@ router.post('/', async (req, res) => {
 const nouvord = new Ord(req.body)
 try {
 await nouvord.save();
-res.status(200).json(nouvord);
+const ordonnance = await Ord.findOne({ consID: nouvord.consID }).populate("consID").populate("patientID").exec();
+console.log(ordonnance)
+res.status(200).json(ordonnance);
 } catch (error) {
 res.status(404).json({ message: error.message });
 }
@@ -39,13 +41,23 @@ res.status(404).json({ message: error.message });
 // // chercher un consultation
 router.get('/:ordId',async(req, res)=>{
 try {
-const ord1 = await Ord.findById(req.params.consId).populate("consID").exec();
+const ord1 = await Ord.findById(req.params.ordId);
 res.status(200).json(ord1);
 } catch (error) {
 res.status(404).json({ message: error.message });
 }
 });
 
+
+
+router.get('/:consId',async(req, res)=>{
+  try {
+  const ord1 = await Ord.findById(req.params.consId);
+  res.status(200).json(ord1);
+  } catch (error) {
+  res.status(404).json({ message: error.message });
+  }
+  });
 
 
 module.exports = router;

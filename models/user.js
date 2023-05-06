@@ -1,8 +1,9 @@
-const mongoose = require('mongoose')
+const mongoose = require('mongoose');
 const Specialite = require("./specialite.js");
-const bcrypt = require('bcrypt')
+const bcrypt = require('bcrypt');
 
 const userSchema = new mongoose.Schema({
+    
     firstName: {
         type: String,
         required: false,
@@ -13,7 +14,10 @@ const userSchema = new mongoose.Schema({
         required: false,
 
     },
-    adresse: { type: String, required: false },
+    adresse:
+     { type: String,
+       required: false 
+        },
     email: {
         type: String,
         required: true,
@@ -39,7 +43,7 @@ const userSchema = new mongoose.Schema({
 
     isActive: {
         type: Boolean,
-        default: false,
+        default: true,
         required: false
     },
 
@@ -47,9 +51,15 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: false
     },
-    certification: { type: String },
-    specialiteID: { type: mongoose.Schema.Types.ObjectId, ref: Specialite },
-    matricule: { type: String }
+    certification:
+     { type: String },
+
+    specialiteID:
+     { type: mongoose.Schema.Types.ObjectId, ref: Specialite },
+
+    matricule: { 
+        type: String },
+        
 },
     {
         timestamps: true,

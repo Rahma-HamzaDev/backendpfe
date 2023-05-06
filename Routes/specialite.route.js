@@ -1,8 +1,8 @@
 const express = require('express');
 const router = express.Router();
-
 const specialite=require("../models/specialite")
 const {uploadFile} =require("../middleware/uploadFile");
+
 // afficher la liste des specialite 
 router.get('/', async (req, res, )=> {
 try {

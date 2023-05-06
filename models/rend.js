@@ -1,33 +1,32 @@
 const mongoose = require("mongoose")
-const medecin = require("./medecin.js");
+const User = require("./user.js");
 
-const patient = require("./patient.js")
+const Patient = require("./patient.js");
+
 const rendSchema = mongoose.Schema({
   
     Daterd: { type: String , required: false },
-
+    timerd: { type: String, required: false },
     Descrd: { type: String, required: false },
-
     etatrend: {
         type: String,
         default: "pending",
         enum: [
           "pending",
-          "open",
-          "rejected",
+          "refused",
           "cancelled",
-          "completed",
+          // "completed",
           "accepted",
         ],
         required: true,
       },
 medecinID: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: medecin
+    ref: User
 },
 patientID: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: patient
+    ref: Patient
 }
 
 

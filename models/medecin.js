@@ -1,34 +1,73 @@
 const mongoose = require("mongoose");
-const specialite = require("./specialite.js");
+// const User =require("./user.js");
+const Specialite = require("./specialite.js");
+
 const bcrypt = require('bcrypt');
 const medecinSchema = mongoose.Schema({
-    nom: { type: String, required: false },
-    numtel: { type: Number, required: false },
-    adresse: { type: String, required: false },
-    // sexemedecin: { type: String, required: false },
-    photo: { type: String },
-    email: { type: String, required: false },
-    password: { type: String, required: false },
+    // user:User,
+    firstName: {
+        type: String,
+        required: false,
 
-    verif: { type: String },
+    },
+    lastName: {
+        type: String,
+        required: false,
+
+    },
+    adresse:
+     { type: String,
+       required: false 
+        },
+    email: {
+        type: String,
+        required: true,
+        unique: true
+    },
+    password: {
+        type: String,
+        required: true,
+    },
+    phone: {
+        type: String,
+        required: false,
+    },
+
+
+    isActive: {
+        type: Boolean,
+        default: true,
+        required: false
+    },
+
+    avatar: {
+        type: String,
+        required: false
+    },
+
+    certification:
+     { 
+        type: String 
+    },
+
+    matricule: { 
+        type: String 
+    },
+
+    specialiteID: {
+         type: mongoose.Schema.Types.ObjectId,
+         ref: Specialite 
+        },
+
+    
 
 
 
-    Hospital: { type: String },
-    diplômes: { type: String },
-    certification: { type: String },
-    cabinetname: { type: String },
-    Experience: { type: String },
-    ExpérienceProfessionnelle: { type: String },
 
-    about: { type: String },
+    isDoctor: { 
+        type: Boolean, 
+        default: true },
 
-    specialiteID: { type: mongoose.Schema.Types.ObjectId, ref: specialite },
-
-
-    ismedecin: { type: Boolean, default: true },
-
-    isAdmin: { type: Boolean, default: false },
 
     // isverified: { type: Boolean, default: false },
 
@@ -41,15 +80,8 @@ const medecinSchema = mongoose.Schema({
 
     role: {
         type: String,
-        enum: ["doctor", "user", "admin"],
         default: "doctor"
     },
-    isActive: {
-        type: Boolean,
-        default: false,
-        required: false
-    },
-
 
 },
     {

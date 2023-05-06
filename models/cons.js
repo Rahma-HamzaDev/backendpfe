@@ -20,10 +20,10 @@ const consSchema = mongoose.Schema({
     // Périmètre : { type: String  },
     DescriptionExamen: { type: String },
 
-    medecinID: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: medecin
-    },
+    // medecinID: {
+    //     type: mongoose.Schema.Types.ObjectId,
+    //     ref: medecin
+    // },
     
     patientID: {
         type: mongoose.Schema.Types.ObjectId,

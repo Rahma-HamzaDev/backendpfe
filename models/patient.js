@@ -1,5 +1,6 @@
 const mongoose = require("mongoose")
-
+// const Medecin = require("./medecin.js");
+const User = require("./user.js");
 const patientSchema = mongoose.Schema({
     numfiche: { type: Number},
     cinPa: { type: Number},
@@ -8,19 +9,21 @@ const patientSchema = mongoose.Schema({
     adressepatient: { type: String },
     sexepatient: { type: String},
 
-    email: { type: String},
+    emailpatient: { type: String},
     // password: { type: String },
     
     numtelPa: { type: Number },
     dateNais: { type: String},
-    profession:{ type: String},
+     profession:{ type: String},
 
 
+    // ispatient: { type: Boolean, default: true },
     
-    isVerified: { type: Boolean },
-
-    ispatient: { type: Boolean, default: true },
-
+    medecinID: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: User
+    },
+    
 }
 ,{ timesstamps :true}
 )
