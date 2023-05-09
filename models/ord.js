@@ -5,32 +5,32 @@ const cons = require("./cons.js");
 
 
 const ordSchema = mongoose.Schema({
-    
+
     NumOrd: { type: Number },
     DateOrd: { type: String },
     // numfiche: { type: Number},
-    NomMedicaments: { type: String},
-    DosageMedicaments : { type: String },
-    FréquanceMedicaments : { type: String  },
-    FormeMedicaments: { type: String  },
+    NomMedicaments: { type: String },
+    DosageMedicaments: { type: String },
+    FréquanceMedicaments: { type: String },
+    FormeMedicaments: { type: String },
     // NomPatient: { type: String  },
-     observation: { type: String  },
+    observation: { type: String },
 
- patientID: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: patient
+    patientID: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: patient
+    },
+
+    consID: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: cons
+    }
+
 },
 
-consID: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: cons 
-}
-
-},
-
-{
-    timesstamps: true,
-  }
+    {
+        timesstamps: true,
+    }
 
 )
 module.exports = mongoose.model('ord', ordSchema)

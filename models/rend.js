@@ -10,13 +10,13 @@ const rendSchema = mongoose.Schema({
     Descrd: { type: String, required: false },
     etatrend: {
         type: String,
-        default: "pending",
+        default: "en attente",
         enum: [
-          "pending",
-          "refused",
-          "cancelled",
-          // "completed",
-          "accepted",
+          "en attente",
+          "refuser",
+          "cancel",
+        //  "completer",
+          "accepter",
         ],
         required: true,
       },
@@ -24,9 +24,9 @@ medecinID: {
     type: mongoose.Schema.Types.ObjectId,
     ref: User
 },
-patientID: {
+userID: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: Patient
+    ref: User
 }
 
 

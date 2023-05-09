@@ -26,16 +26,21 @@ router.get('/', async (req, res, )=> {
   
 // créer un nouvel ordonnnance
 router.post('/', async (req, res) => {
-const nouvord = new Ord(req.body)
-try {
-await nouvord.save();
-const ordonnance = await Ord.findOne({ consID: nouvord.consID }).populate("consID").populate("patientID").exec();
-console.log(ordonnance)
-res.status(200).json(ordonnance);
-} catch (error) {
-res.status(404).json({ message: error.message });
-}
+  try {
+    const ord = await Ord.findOneAndUpdate({ consID: req.body.consID }, { "$set": req.body })
+    if (!ord) {
+      const nouvord = new Ord(req.body)
+      await nouvord.save();
+    }
+
+    const ordonnance = await Ord.findOne({ consID: req.body.consID }).populate("consID").populate("patientID").exec();
+    console.log(ordonnance)
+    res.status(200).json(ordonnance);
+  } catch (error) {
+    res.status(404).json({ message: error.message });
+  }
 });
+
 
 
 // // chercher un consultation

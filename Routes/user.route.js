@@ -64,14 +64,25 @@ router.post('/register', async (req, res) => {
 
     try {
         await nouvuser.save();
-   
+   // Envoyer l'e-mail de confirmation de l'inscription
+   var mailOption = {
+    from: '"verify your email " <esps421@gmail.com>',
+    to: nouvuser.email,
+    subject: 'vérification your email ',
+    html: `<h2>${nouvuser.firstName}! thank you for registreting on our website</h2>
+<h4>please verify your email to procced.. </h4>
+<a href="http://${req.headers.host}/api/users/status/edit?email=${nouvuser.email}">click here</a>`
+}
+transporter.sendMail(mailOption, function (error, info) {
+    if (error) {
+        console.log(error)
+    }
+    else {
+        console.log('verification email sent to your gmail account ')
+    }
+})
 
-        // if (req.body.role === 'doctor')
-        //  {
-        //     const newDoctor = new Medecin(req.body);
-        //     // newDoctor.userId = createdUser._id; // Assigner l'ID de l'utilisateur nouvellement créé à la clé étrangère "userId" du modèle Medecin
-        //     await Medecin.create(newDoctor);
-        // }
+
         res.status(200).json(nouvuser);
         // return res.status(201).send({ success: true, message: "Account created successfully", user: createdUser })
     } catch (error) {
@@ -168,6 +179,8 @@ router.post('/', async (req, res) => {
 
 // });
 //edit user
+
+
 router.get('/status/edit/', async (req, res) => {
     try {
 
