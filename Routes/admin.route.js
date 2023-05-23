@@ -1,48 +1,79 @@
 const express = require('express');
 const router = express.Router();
-const {uploadFile} =require("../middleware/uploadFile");
-const User=require("../models/user");
+const { uploadFile } = require("../middleware/uploadFile");
+const User = require("../models/user");
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken')
-const admin=require("../models/admin")
+const admin = require("../models/admin")
 
 //pour admin 
 
 
 //doctor
-router.get('/alldoctor', async (req, res, )=> {
+router.get('/alldoctor', async (req, res,) => {
     try {
-    const medecins = await User.find({role:"doctor"}).populate("specialiteID").exec();
-    res.status(200).json(medecins);
+        const medecins = await User.find({ role: "doctor" }).populate("specialiteID").exec();
+        res.status(200).json(medecins);
+    } catch (error) {
+        res.status(404).json({ message: error.message });
+    }
+});
+
+//users
+
+router.get('/alluser', async (req, res,) => {
+    try {
+        const users = await User.find({ role: "user" });
+        res.status(200).json(users);
+    } catch (error) {
+        res.status(404).json({ message: error.message });
+    }
+});
+//acccepter user
+router.put('/accept/:userID', async (req, res) => {
+
+    const id = req.params.userID;
+    try {
+        const acc = {
+            accountStatus: "accepter", _id: id
+        };
+        await User.findByIdAndUpdate(id, acc);
+        res.json(acc);
+    } catch (error) {
+        res.status(404).json({ message: error.message });
+    }
+  })
+  
+//refuser user 
+
+
+router.put('/refus/:userID', async (req, res) => {
+
+    const id = req.params.userID;
+    try {
+      
+        const acc = {
+            
+            accountStatus: "refuser", _id: id
+        };
+        await User.findByIdAndUpdate(id, acc);
+        res.json(acc);
+    } catch (error) {
+        res.status(404).json({ message: error.message });
+    }
+  })
+
+//ajouter un compte user 
+
+router.post('/ajout', async (req, res) => {
+    const nouvuser = new User(req.body)
+    try {
+    await nouvuser.save();
+    res.status(200).json(nouvuser);
     } catch (error) {
     res.status(404).json({ message: error.message });
     }
     });
-
-//users
-
-    router.get('/alluser', async (req, res, )=> {
-        try {
-        const users = await User.find({role:"user"});
-        res.status(200).json(users);
-        } catch (error) {
-        res.status(404).json({ message: error.message });
-        }
-        });
-
-
-// afficher la liste des admin 
-router.get('/', async (req, res, )=> {
-try {
-const admins = await admin.find();
-res.status(200).json(admins);
-} catch (error) {
-res.status(404).json({ message: error.message });
-}
-});
-
-
-
 
 
 

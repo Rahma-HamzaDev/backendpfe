@@ -1,6 +1,5 @@
 const express = require('express');
 const router = express.Router();
-const Medecin=require("../models/medecin")
 const patient=require("../models/patient")
 // afficher la liste des patient 
 router.get('/', async (req, res, )=> {
@@ -85,6 +84,32 @@ const id = req.params.patientId;
 await patient.findByIdAndDelete(id);
 res.json({ message: "patient deleted successfully." });
 });
+
+
+// router.get('/:code/dossier', async (req, res) => {
+//   const { code } = req.params;
+//   try {
+//     // Recherche dans la base de données le dossier correspondant au code d'accès
+//     const dossier = await Dossier.findOne({ code: code });
+
+//     // Vérification si le dossier existe
+//     if (!dossier) {
+//       return res.status(404).json({ message: 'Dossier introuvable' });
+//     }
+
+//     // Si le dossier est trouvé, vous pouvez effectuer d'autres opérations ou traitements nécessaires avant de le renvoyer
+
+//     // Par exemple, vous pouvez effectuer des opérations de déchiffrement des données, de formatage, de filtrage, etc.
+
+//     // Une fois que les opérations sont terminées, retournez le dossier
+//     return res.json(dossier);
+//   } catch (error) {
+//     // Gérer les erreurs de recherche du dossier
+//     console.log('Erreur lors de la recherche du dossier:', error);
+//     return res.status(500).json({ message: 'Erreur lors de la recherche du dossier' });
+//   }
+// });
+
 
 
 module.exports = router;

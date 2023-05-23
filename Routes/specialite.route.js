@@ -34,13 +34,13 @@ res.status(404).json({ message: error.message });
 }
 });
 // modifier un specialite
-router.put('/:specialiteId', uploadFile.single("Icon") ,async (req, res)=> {
+router.put('/:specialiteId',async (req, res)=> {
 const {nomsep , desc} = req.body;
-const Icon=req.file.filename;
+
 const id = req.params.specialiteId;
 try {
 const spe1 = { 
-nomsep:nomsep,desc:desc ,Icon:Icon, _id:id };
+nomsep:nomsep,desc:desc , _id:id };
 await specialite.findByIdAndUpdate(id, spe1);
 res.json(spe1);
 } catch (error) {

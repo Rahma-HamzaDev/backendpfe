@@ -1,6 +1,7 @@
 const mongoose = require("mongoose")
 // const Medecin = require("./medecin.js");
 const User = require("./user.js");
+
 const patientSchema = mongoose.Schema({
     numfiche: { type: Number},
     cinPa: { type: Number},
@@ -19,6 +20,9 @@ const patientSchema = mongoose.Schema({
 
     // ispatient: { type: Boolean, default: true },
     
+   
+
+
     medecinID: {
         type: mongoose.Schema.Types.ObjectId,
         ref: User

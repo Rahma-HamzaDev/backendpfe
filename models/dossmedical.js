@@ -1,10 +1,11 @@
 const mongoose = require("mongoose")
-const Medecin = require("./medecin.js");
+const User = require("./user.js");
 const Patient = require("./patient.js");
 const Cons = require("./cons.js");
 const Ord = require("./ord.js");
 const dossmedicalSchema = mongoose.Schema({
-    
+  code: { type: String ,   required: false},
+
  patientID: {
     type: mongoose.Schema.Types.ObjectId,
     ref: Patient
@@ -21,7 +22,7 @@ ordID: {
 },
 medecinID: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: Medecin
+    ref: User
 },
 
 },

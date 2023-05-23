@@ -1,10 +1,12 @@
 const mongoose = require("mongoose")
-const medecin = require("./medecin.js");
+
 const patient = require("./patient.js");
 const cons = require("./cons.js");
+const user = require("./user.js");
 
 
 const ordSchema = mongoose.Schema({
+    code: { type: String },
 
     NumOrd: { type: Number },
     DateOrd: { type: String },
@@ -24,6 +26,11 @@ const ordSchema = mongoose.Schema({
     consID: {
         type: mongoose.Schema.Types.ObjectId,
         ref: cons
+    },
+
+   medecinID: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: user
     }
 
 },

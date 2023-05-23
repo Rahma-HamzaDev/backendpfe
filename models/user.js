@@ -44,7 +44,7 @@ const userSchema = new mongoose.Schema({
     isActive: {
         type: Boolean,
         default: false,
-        required: false
+        required: true
     },
 
     avatar: {
@@ -55,7 +55,15 @@ const userSchema = new mongoose.Schema({
      { type: String },
 
     specialiteID:
-     { type: mongoose.Schema.Types.ObjectId, ref: Specialite },
+     { type: mongoose.Schema.Types.ObjectId,
+         ref: Specialite },
+     
+     accountStatus: {
+        type: String,
+        default: "en cour",
+        enum: ["en cour", "refuser", "accepter"],
+        required: false,
+    },
 
     matricule: { 
         type: String },
