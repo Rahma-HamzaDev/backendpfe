@@ -64,14 +64,15 @@ res.status(200).json(pat);
 res.status(404).json({ message: error.message });
 }
 });
+
 // modifier un patient
 router.put('/:patientId', async (req, res)=> {
-const {numfiche,cinPa,nompatient,prenompatient,email,adressepatient,sexepatient,password,numtelPa,profession ,dateNais} = req.body;
+const {numfiche,cinPa,nompatient,prenompatient,email,adressepatient,sexepatient,password,numtelPa,profession ,dateNais,HistoriqueSocial,HistoriqueFamilial} = req.body;
 
 const id = req.params.patientId;
 try {
 const pat1 = { 
-    cinPa:cinPa,nompatient:nompatient,numfiche:numfiche,prenompatient:prenompatient,profession:profession,email:email,adressepatient:adressepatient,sexepatient:sexepatient,password:password,numtelPa:numtelPa,dateNais:dateNais, _id:id };
+    cinPa:cinPa,nompatient:nompatient,numfiche:numfiche,prenompatient:prenompatient,profession:profession,email:email,adressepatient:adressepatient,HistoriqueSocial:HistoriqueSocial,HistoriqueFamilial:HistoriqueFamilial,sexepatient:sexepatient,password:password,numtelPa:numtelPa,dateNais:dateNais, _id:id };
 await patient.findByIdAndUpdate(id, pat1);
 res.json(pat1);
 } catch (error) {

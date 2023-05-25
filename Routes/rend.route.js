@@ -19,11 +19,14 @@ res.status(404).json({ message: error.message });
 }
 });
 
+// const rends = await Rend.find({ "etatrend": "accepter"});
+
+
 
 //afficher rendez vous patient  (historique rendez vous de maladie patientID : user.id connecter )
 router.get('/user/:userId', async (req, res) => {
   try {
-    const rendP = await Rend.find({ userID: req.params.userId }).populate("userID").populate("medecinID").exec();
+    const rendP = await Rend.find({ userID: req.params.userId}).populate("userID").populate("medecinID").exec();
     res.status(200).json(rendP);
   } catch (error) {
   res.status(404).json({ message: error.message });
@@ -32,7 +35,7 @@ router.get('/user/:userId', async (req, res) => {
 
 
 
-
+  
 
 
 //changer l'etat en accepter avec le medecin
@@ -224,16 +227,16 @@ router.put('/raporter/:rendID', async (req, res) => {
    
  ///// const phoneNumber = rendezVous.userID.phone;
 
-    // try {
-    //   await twilio.messages.create({
-    //     from: '+12542804894',
-    //     to: '+21621274227',
-    //     body: messageBody
-    //   });
-    //   console.log('Message sent to', "+21621274227");
-    // } catch (error) {
-    //   console.log('Error sending message to', "+21621274227", ':', error);
-    // }
+    try {
+      await twilio.messages.create({
+        from: '+12542804894',
+        to: '+21621274227',
+        body: messageBody
+      });
+      console.log('Message sent to', "+21621274227");
+    } catch (error) {
+      console.log('Error sending message to', "+21621274227", ':', error);
+    }
   } catch (error) {
     res.status(404).json({ message: error.message });
   }
@@ -309,6 +312,9 @@ res.status(404).json({ message: error.message });
 });
 
 
+
+
+
 // Route pour envoyer un SMS de rappel au patient un jour avant le rendez-vous
 router.post('/reminder/:rendID', async (req, res) => {
   const id = req.params.rendID;
@@ -347,7 +353,14 @@ router.post('/reminder/:rendID', async (req, res) => {
 
 
 
-
+router.get('/accepted/users/:userId', async (req, res) => {
+  try {
+    const rendP = await Rend.find({ userID: req.params.userId ,"etatrend": "accepter"}).populate("userID").populate("medecinID").exec();
+    res.status(200).json(rendP);
+  } catch (error) {
+  res.status(404).json({ message: error.message });
+  }
+  });
 
 
 

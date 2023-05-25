@@ -10,7 +10,7 @@ const rendSchema = mongoose.Schema({
     // Descrd: { type: String, required: false },
     etatrend: {
         type: String,
-        enum: ["en attente","A rapporter","cancel","accepter" ,"contrôle"],
+        enum: ["en attente","A rapporter","accepter" ,"contrôle"],
         // ,"completer"
         default: "en attente",
         required: true,

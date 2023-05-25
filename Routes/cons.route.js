@@ -4,8 +4,6 @@ const router = express.Router();
 
 
 //  afficher la liste des consultation
-
-
 router.get('/patients/:patientId', async (req, res) => {
     try {
       const consultations = await Cons.find({ patientID: req.params.patientId }).populate("patientID").exec();
@@ -16,7 +14,7 @@ router.get('/patients/:patientId', async (req, res) => {
 });
 
 
-
+//consultation
 router.get('/', async (req, res, )=> {
     try {
     const cons1 = await Cons.find().populate("patientID").exec();
@@ -47,11 +45,11 @@ res.status(404).json({ message: error.message });
 });
 // modifier un consultation
 router.put('/:consId', async (req, res)=> {
-const {DateCons,NumCons,numfiche,MotifCons,AntécedentsMédecaux,HistoriqueFamilial,ExemansComplementaires,HistoriqueSocial,TaillePatient,PoisPatient,tension,Température,Périmètre,DescriptionExamen,medecinID,patientID} = req.body;
+const {DateCons,NumCons,numfiche,MotifCons,ExemansComplementaires,TaillePatient,PoisPatient,tension,Température,DescriptionExamen,medecinID,patientID} = req.body;
 const id = req.params.consId;
 try {
 const red = { 
-    DateCons:DateCons,NumCons:NumCons,numfiche:numfiche,MotifCons:MotifCons,AntécedentsMédecaux:AntécedentsMédecaux,HistoriqueFamilial:HistoriqueFamilial,ExemansComplementaires:ExemansComplementaires,HistoriqueSocial:HistoriqueSocial,Périmètre:Périmètre,TaillePatient:TaillePatient,PoisPatient:PoisPatient,tension:tension,Température:Température,DescriptionExamen:DescriptionExamen,medecinID:medecinID,patientID:patientID, _id:id };
+    DateCons:DateCons,NumCons:NumCons,numfiche:numfiche,MotifCons:MotifCons,ExemansComplementaires:ExemansComplementaires,TaillePatient:TaillePatient,PoisPatient:PoisPatient,tension:tension,Température:Température,DescriptionExamen:DescriptionExamen,medecinID:medecinID,patientID:patientID, _id:id };
 await Cons.findByIdAndUpdate(id, red);
 res.json(Cons);
 } catch (error) {
