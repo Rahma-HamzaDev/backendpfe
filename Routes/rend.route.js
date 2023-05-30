@@ -75,7 +75,7 @@ router.put('/accept/:rendID', async (req, res) => {
        // Envoyer un SMS au patient pour l'informer de l'acceptation du rendez-vous
 
     // Envoyer un SMS au patient pour l'informer de l'acceptation du rendez-vous
-    const messageBody = `Votre rendez-vous a été accepté.pour le  Date : ${rendezVousDate} à Heure : ${rendezVousTime}`;
+    const messageBody = `Votre rendez-vous a été accepté . pour le  Date : ${rendezVousDate} à Heure : ${rendezVousTime}`;
     // const phoneNumber = rendezVous.userID.phone;
 
     try {
@@ -161,7 +161,7 @@ if (rendezVousPourLaJournee > 10) {
     await nouvrend.save();
     const date = nouvrend.Daterd;
 const time = nouvrend.timerd;
-const messageBody = `DrMedical, votre Rendez_Vous créé avec succès pour le  ${date} à ${time} , Attendez la réponse de médecin. `;
+const messageBody = `DrMedical, Rendez-vous créé pour la date ${date} à ${time} , Attendez la réponse de médecin. `;
 
     // const lienRendezVous = `https://votre-site.com/accept/${nouvrend._id}`;
     // const lienRendezVous = `http://localhost:3001/api/rends/accept/${nouvrend._id}`;

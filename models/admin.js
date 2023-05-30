@@ -8,7 +8,7 @@ const adminSchema = mongoose.Schema({
     isAdmin: { type: Boolean, default: true },
     role: {
         type: String,
-        enum: ["user", "admin","doctor"],
+        enum: ["patient", "admin","doctor"],
         default: "admin"
         },
         isActive: {

@@ -23,7 +23,7 @@ router.get('/alldoctor', async (req, res,) => {
 
 router.get('/alluser', async (req, res,) => {
     try {
-        const users = await User.find({ role: "user" });
+        const users = await User.find({ role: "patient" });
         res.status(200).json(users);
     } catch (error) {
         res.status(404).json({ message: error.message });
