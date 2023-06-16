@@ -71,22 +71,20 @@ router.put('/accept/:rendID', async (req, res) => {
     const rendezVousDate = new Date(rendezVous.Daterd).toLocaleDateString();
     const rendezVousTime = rendezVous.timerd;
    
-   
        // Envoyer un SMS au patient pour l'informer de l'acceptation du rendez-vous
-
     // Envoyer un SMS au patient pour l'informer de l'acceptation du rendez-vous
     const messageBody = `Votre rendez-vous a été accepté . pour le  Date : ${rendezVousDate} à Heure : ${rendezVousTime}`;
     // const phoneNumber = rendezVous.userID.phone;
 
     try {
       await twilio.messages.create({
-        from: '+12542804894',
-        to: '+21621274227',
+        from: '+14026859122',
+        to: '+21699583157',
         body: messageBody
       });
-      console.log('Message sent to', "+21621274227");
+      console.log('Message sent to', "+21699583157");
     } catch (error) {
-      console.log('Error sending message to', "+21621274227", ':', error);
+      console.log('Error sending message to', "+21699583157", ':', error);
     }
   } catch (error) {
     res.status(404).json({ message: error.message });
@@ -168,8 +166,8 @@ const messageBody = `DrMedical, Rendez-vous créé pour la date ${date} à ${tim
 
    // Envoi du SMS avec le lien
    twilio.messages.create({
-    from: "+12542804894",
-    to: "+21621274227",
+    from: "+14026859122",
+    to: "+21699583157",
     body: messageBody
 
     // body: `You have successfully scheduled an appointment. Click the link to accept: ${lienRendezVous}`
@@ -196,14 +194,14 @@ router.put('/raporter/:rendID', async (req, res) => {
      const rendezVous = await Rend.findById(id).populate("userID").exec();
 
     // Check if the chosen date is already reserved
-    const isDateReserved = await Rend.exists({ Daterd,timerd, etatrend: { $ne: "A rapporter" } });
+    const isDateReserved = await Rend.exists({ Daterd,timerd, etatrend: { $ne: "reporter" } });
     if (isDateReserved) {
       return res.status(400).json({ message: 'The chosen date is already reserved.' });
     }
 
    
     const red = {
-      etatrend:"A rapporter",
+      etatrend:"reporter",
       Daterd: Daterd, // Update the date
       timerd: timerd, // Update the time
       _id: id
@@ -229,13 +227,13 @@ router.put('/raporter/:rendID', async (req, res) => {
 
     try {
       await twilio.messages.create({
-        from: '+12542804894',
-        to: '+21621274227',
+        from: '+14026859122',
+        to: '+21699583157',
         body: messageBody
       });
-      console.log('Message sent to', "+21621274227");
+      console.log('Message sent to', "+21699583157");
     } catch (error) {
-      console.log('Error sending message to', "+21621274227", ':', error);
+      console.log('Error sending message to', "+21699583157", ':', error);
     }
   } catch (error) {
     res.status(404).json({ message: error.message });
@@ -266,7 +264,7 @@ router.put('/raporter/:rendID', async (req, res) => {
   const id = req.params.rendID;
   try {
       const red = {
-        etatrend: "A rapporter", _id: id
+        etatrend: "reporter", _id: id
       };
       await Rend.findByIdAndUpdate(id, red);
       res.json(red);
@@ -335,8 +333,8 @@ router.post('/reminder/:rendID', async (req, res) => {
 
       // Envoyer le SMS de rappel
       await twilio.messages.create({
-        from: '+12542804894',
-        to: '+21621274227',
+        from: '+14026859122',
+        to: '+21699583157',
         body: messageBody
       });
 
@@ -377,8 +375,8 @@ router.get('/accepted/users/:userId', async (req, res) => {
 //     res.json(updateRend);
 
 //     twilio.messages.create({
-//       from: "+12542804894",
-//       to: "+21621274227",
+//       from: "+14026859122",
+//       to: "+21699583157",
 //       body: "Your appointment has been completed."
 //     }).then((message) => {
 //       console.log('Message sent:', message.sid);

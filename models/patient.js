@@ -3,7 +3,7 @@ const mongoose = require("mongoose")
 const User = require("./user.js");
 
 const patientSchema = mongoose.Schema({
-    numfiche: { type: Number },
+    numfiche: { type: String , unique : true},
     cinPa: { type: Number },
     nompatient: { type: String },
     prenompatient: { type: String },
@@ -12,10 +12,10 @@ const patientSchema = mongoose.Schema({
 
     emailpatient: { type: String },
     // password: { type: String },
+    profession: { type: String },
 
     numtelPa: { type: Number },
     dateNais: { type: String },
-    // profession: { type: String },
 
     HistoriqueFamilial: { type: String },
     HistoriqueSocial: { type: String },

@@ -1,23 +1,25 @@
 const mongoose = require('mongoose');
 const Specialite = require("./specialite.js");
 const bcrypt = require('bcrypt');
+const disponibilites = require('./disponibilites.js');
 
 const userSchema = new mongoose.Schema({
-    
+
     firstName: {
         type: String,
-        required: false,
+        required: true,
 
     },
     lastName: {
         type: String,
-        required: false,
+        required: true,
 
     },
     adresse:
-     { type: String,
-       required: false 
-        },
+    {
+        type: String,
+        required: false
+    },
     email: {
         type: String,
         required: true,
@@ -37,7 +39,7 @@ const userSchema = new mongoose.Schema({
     },
     role: {
         type: String,
-        enum: ["admin", "doctor","patient"],
+        enum: ["admin", "doctor", "patient"],
         default: "patient"
     },
 
@@ -52,22 +54,36 @@ const userSchema = new mongoose.Schema({
         required: false
     },
     certification:
-     { type: String },
+        { type: String },
 
     specialiteID:
-     { type: mongoose.Schema.Types.ObjectId,
-         ref: Specialite },
-     
-     accountStatus: {
+    {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: Specialite
+    },
+
+
+    // startTime: { type: String },
+
+    // endTime: { type: String },
+
+    // consultationTime: { type: String },
+
+    // joursdeTravail: { type: String },
+
+
+    accountStatus: {
         type: String,
         default: "en cour",
-        enum: ["en cour", "refuser", "accepter"],
+        enum: ["en cour", "refuser", "accepter" , "admin"],
         required: false,
     },
 
-    matricule: { 
-        type: String },
-        
+    matricule: {
+        type: String,
+        // required: true
+    },
+
 },
     {
         timestamps: true,

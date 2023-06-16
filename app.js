@@ -27,7 +27,7 @@ const adminRouter = require("./Routes/admin.route");
 const consRouter = require("./Routes/cons.route");
 const ordRouter = require("./Routes/ord.route");
 const dosRouter = require("./Routes/dossmedicale.route");
-
+// const dispoRouter = require("./Routes/dispo.route");
 dotenv.config()
 
 
@@ -58,7 +58,7 @@ app.use('/api/cons', consRouter);
 app.use('/api/ord', ordRouter);
 app.use('/api/admin', adminRouter);
 app.use('/api/doss', dosRouter);
-
+// app.use('/api/dispo', dispoRouter);
 app.listen(PORT, () => {
     console.log(`Server is listening on port ${PORT}`);
 })

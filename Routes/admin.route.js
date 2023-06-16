@@ -12,18 +12,35 @@ const admin = require("../models/admin")
 //doctor
 router.get('/alldoctor', async (req, res,) => {
     try {
-        const medecins = await User.find({ role: "doctor" }).populate("specialiteID").exec();
+        // ,accountStatus :"en cour"
+        const medecins = await User.find({ role: "doctor" ,accountStatus :"en cour" }).populate("specialiteID").exec();
         res.status(200).json(medecins);
     } catch (error) {
         res.status(404).json({ message: error.message });
     }
 });
-
+//doctor
+router.get('/allusers/Acepted', async (req, res,) => {
+    try {
+        const users = await User.find({ accountStatus :"accepter" }).populate("specialiteID").exec();
+        res.status(200).json(users);
+    } catch (error) {
+        res.status(404).json({ message: error.message });
+    }
+});
+router.get('/allusers/refuser', async (req, res,) => {
+    try {
+        const users = await User.find({accountStatus :"refuser" }).populate("specialiteID").exec();
+        res.status(200).json(users);
+    } catch (error) {
+        res.status(404).json({ message: error.message });
+    }
+});
 //users
 
 router.get('/alluser', async (req, res,) => {
     try {
-        const users = await User.find({ role: "patient" });
+        const users = await User.find({ role: "patient" ,accountStatus :"en cour" });
         res.status(200).json(users);
     } catch (error) {
         res.status(404).json({ message: error.message });

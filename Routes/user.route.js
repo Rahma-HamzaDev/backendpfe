@@ -45,7 +45,8 @@ router.get('/', async (req, res,) => {
 router.get('/doctors', async (req, res) => {
     try {
         console.log(req.query)
-        const users = await User.find({role: req.query.role}).populate('specialiteID').exec()
+        
+        const users = await User.find({role: req.query.role , accountStatus :"accepter" }).populate('specialiteID').exec()
         return res.status(200).send(users.filter(user => user?.specialiteID?.nomsep === req.query.specialite))
     } catch (error) {
         res.status(404).json({ message: error.message });

@@ -10,7 +10,7 @@ const rendSchema = mongoose.Schema({
     // Descrd: { type: String, required: false },
     etatrend: {
         type: String,
-        enum: ["en attente","A rapporter","accepter" ,"contrôle"],
+        enum: ["en attente","reporter","accepter" ,"contrôle"],
         // ,"completer"
         default: "en attente",
         required: true,
@@ -35,7 +35,7 @@ const rendSchema = mongoose.Schema({
 
     },
     phone: {
-      type: String,
+      type: Number,
       required: false,
   },
   
