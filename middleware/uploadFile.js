@@ -17,6 +17,7 @@ callback(null, name);
 });
 const uploadFile = multer({
     storage: storage
+    // dest:'../public/'
 });
 module.exports={uploadFile};
     
